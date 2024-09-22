@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+    {% for book in books %}
+    <table>
+        <h1>{{ book.title|title }}</h1>
+        <p>{{ book.description|truncatewords:12 }}</p>
+        <a href="{{ book.get_absolute_url }}" class="btn  btn-success">read more..</a>
+        <a href="{% url "book_create" %}" class="btn  btn-warning">New Book</a>
+    </table>
+        <p>---------------</p>
+    {% endfor %}
+{% endblock %}
