@@ -1,0 +1,13 @@
+{
+    "name": "My Django Dev Container",
+    "image": "python:3.12",
+    "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+    ],
+    "settings": {
+        "python.pythonPath": "/usr/local/bin/python"
+    },
+    "postCreateCommand": "pip install -r requirements.txt",
+    "remoteUser": "root"
+}

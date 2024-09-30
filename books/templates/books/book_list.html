@@ -3,13 +3,56 @@
 {% block title %}Book List{% endblock %}
 
 {% block content %}
-    {% for book in books %}
-    <table>
-        <h1>{{ book.title|title }}</h1>
-        <p>{{ book.description|truncatewords:12 }}</p>
-        <a href="{{ book.get_absolute_url }}" class="btn  btn-success">read more..</a>
-        <a href="{% url "book_create" %}" class="btn  btn-warning">New Book</a>
-    </table>
-        <p>---------------</p>
-    {% endfor %}
+    <div class="container mt-4">
+        <div class="row flex-row-reverse justify-content-md-center">
+            {% for book in books %}
+            <div class="card m-2" style="max-width: 45%">
+                <div class="row g-0 h-100" dir="rtl">
+                    <div class="col-md-4">
+                        {% if book.cover %}
+                            <img src="{{ book.cover.url }}"class="img-fluid rounded-start" alt="...">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 h-100">
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="card-body">
+                                <a class= 'text-decoration-none' href="{{ book.get_absolute_url }}"><h3 class="card-title"><strong>{{ book.title }} </strong></h3></a>
+                                <p class="card-text pt-3">{{ book.description|truncatewords:30 }}</p>
+                                <p class="text-muted">نویسنده: {{ book.author }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation" >
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+              {% if page_obj.has_previous %}
+              <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+            </a>
+            {% endif %}
+          </li>
+          <li class="page-item"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+          <li class="page-item">
+            {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+            {% endif %}
+          </li>
+        </ul>
+      </nav>
+
+
+<footer class="bg-light text-center text-lg-start mt-5">
+<div class="text-center bg-grey">
+    <p> تجربه ای بهتر<a class="text-dark" href="#" target="_blank">abolfazl mohammadi</a></p>
+</div>
+</footer>
+
 {% endblock %}
